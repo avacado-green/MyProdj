@@ -6,35 +6,35 @@ use App\Model\User;
 use Exception;
 
 class UserController extends BaseController {
-    public function save() {
-        $name = $_GET['name'] ?? null;
-        $birthday = $_GET['birthday'] ?? null;
+    public function delete() {
+        $id = $_POST['id'] ?? null;
 
-        if ($name && $birthday) {
-            // Логика сохранения пользователя
+        if ($id) {
+            echo json_encode(['status' => 'success']);
         } else {
             throw new Exception('Invalid data');
         }
+    }
+
+    public function editForm($id) {
+        $user = User::find($id);
+
+        $this->render('edit.twig', ['user' => $user]);
     }
 
     public function update() {
-        $id = $_GET['id'] ?? null;
-        $name = $_GET['name'] ?? null;
+        $id = $_POST['id'] ?? null;
+        $name = $_POST['name'] ?? null;
 
         if ($id && $name) {
-            // Логика обновления пользователя
-        } else {
-            throw new Exception('Invalid data');
-        }
-    }
+            $user = User::find($id);
+            $user->name = $name;
+            $user->save();
 
-    public function delete() {
-        $id = $_GET['id'] ?? null;
-
-        if ($id) {
-            // Логика удаления пользователя
+            header('Location: /users');
         } else {
             throw new Exception('Invalid data');
         }
     }
 }
+
