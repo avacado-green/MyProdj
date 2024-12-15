@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    image: php:7.4-apache
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html/src
+      - ./templates:/var/www/templates
+      - ./public:/var/www/public
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3309:3306"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+

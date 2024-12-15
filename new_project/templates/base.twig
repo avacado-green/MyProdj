@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
+</head>
+<body>
+{% include 'header.twig' %}
+<div class="container">
+    <p>Current time: {{ "now"|date("Y-m-d H:i:s") }}</p>
+    {% block content %}{% endblock %}
+</div>
+{% include 'sidebar.twig' %}
+{% include 'footer.twig' %}
+</body>
+</html>
